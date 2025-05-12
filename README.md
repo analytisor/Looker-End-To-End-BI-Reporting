@@ -63,6 +63,10 @@ This portfolio showcases my work developing scalable, end-to-end business intell
 - Became a weekly staple in exec decision-making
 - Improved strategic agility by enabling fast trend detection and performance conversations
 
+### 📸 Screenshot: Executive Pulse Dashboard
+
+![Executive Pulse Dashboard](./executive%20pulse.jpg)
+
 ---
 
 ## 🔬 Advanced LookML Techniques

@@ -66,6 +66,45 @@ dimension: funnel_type {
       ELSE 'Unidentified'
     END ;;
 }
+```
 
 
+## 📈 Project 2: Executive Pulse Dashboard
 
+**Audience**: C-Level and Executive Leadership  
+**Goal**: Provide an automated, high-level pulse on business health covering both short-term and long-term performance.
+
+### 🔍 Features
+- Two-part structure: **"Last 12 Months"** and **"Last 5 Weeks"**
+- Unique line chart design overlaying:
+  - 🟦 Current Year Actuals  
+  - 🟨 Previous Year Actuals  
+  - 🟥 YoY % Change  
+- Metrics covered: Revenue, Orders, Sessions, CAC, LTV, Retention Rate
+- Auto-scheduled delivery to executive inboxes
+
+### 🧩 Technical Highlights
+- **YoY calculation** using ISO week matching instead of simple calendar weeks for accuracy
+- Custom time-window dimensions to dynamically control report breakdown:
+  - `is_last_5_weeks`
+  - `is_last_12_months`
+  - `is_yoy_comparable`
+- Dynamic flagging enabled intuitive dashboard filtering without needing manual parameter controls
+
+### 📄 Custom Time Flag Snippet
+
+```lookml
+ dimension: last_5_weeks_flag {
+    type: yesno
+    sql:
+    CASE
+      WHEN ${calendar_week_of_year} BETWEEN (EXTRACT(WEEK FROM CURRENT_DATE) - 5) AND (EXTRACT(WEEK FROM CURRENT_DATE) - 1)
+      THEN TRUE
+      ELSE FALSE
+    END
+  ;;
+  }
+```
+### 📸 Screenshot: Executive Pulse Dashboard
+
+}

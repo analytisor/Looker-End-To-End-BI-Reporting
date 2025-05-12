@@ -134,4 +134,42 @@ view: vendor_performance_plus_historical {
 ![Executive Pulse Dashboard](./executive%20pulse.jpg)
 
 
-}
+## 🔁 Project 3: Sample Pack Repeat Purchase Funnel
+
+**Audience**: Retail and Merchandising Teams  
+**Goal**: Measure the effectiveness of sample pack offers by tracking whether first-time buyers return to make additional purchases.
+
+### 🔍 Features
+- Segmented customers based on order count: first-time, second-time, and repeat (3+ purchases)
+- Built visual funnel in Looker to show drop-off between first, second, and third+ purchases
+- Custom filtering to isolate customers who started with a **specific SKU** (sample pack)
+- Allowed granular exploration by date, SKU group, and acquisition source
+
+### 🧩 Technical Highlights
+- Created a **custom dimension** using **table expressions in the Looker UI** to classify users by order sequence
+- Joined order-level data to customer IDs and used window functions to calculate sequence position
+- Used filters to isolate customers whose **first purchase SKU** matched defined sample pack product IDs
+
+### 📄 Valid Order Classification (UI-based)
+
+Used a Looker table calculation + custom dimension to segment customers by valid purchase behavior and order sequence:
+
+![Valid Orders Dimension](./valid_orders_dimension.jpg)
+
+### 📊 Sample Pack Conversion Funnel
+
+This visualization tracks the number of customers who made:
+- Only their **first purchase** (sample pack)
+- Came back for a **second purchase**
+- Became **repeat customers** with 3+ orders
+
+![Repeat Purchasers Funnel](./repeat_purchasers.jpg)
+
+### 💥 Business Impact
+- Informed merchandising decisions by identifying the **true downstream value of sample pack promotions**
+- Enabled the retail team to prioritize which SKUs to feature in acquisition funnels
+- Resulted in a shift toward promoting bundles with **higher 2nd-order conversion rates**
+
+
+
+

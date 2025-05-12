@@ -25,12 +25,15 @@ This portfolio showcases my work developing scalable, end-to-end business intell
 
 ### 🧩 Technical Highlights
 - Custom dimensions to classify campaigns by funnel stage (based on naming conventions or fallback hardcoded rules)
-- Metric comparison using rolling ISO week logic
 - Scheduled dashboard delivery to stakeholders via email
 
 ### 💥 Business Impact
 - Eliminated manual weekly reporting for the paid media manager
 - Delivered consistent, executive-ready performance summaries with no analyst intervention
+
+### 📸 Screenshot: Paid Media Performance Dashboard
+
+![Paid Media Performance Dashboard](./dynamic_paid_media_dashboard.jpg)
 
 ----
 

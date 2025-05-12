@@ -80,7 +80,7 @@ dimension: funnel_type {
   - 🟦 Current Year Actuals  
   - 🟨 Previous Year Actuals  
   - 🟥 YoY % Change  
-- Metrics covered: Revenue, Orders, Sessions, CAC, LTV, Retention Rate
+- Metrics: Revenue, Orders, Sessions, CAC, LTV, Retention Rate
 - Auto-scheduled delivery to executive inboxes
 
 ### 🧩 Technical Highlights
@@ -90,21 +90,48 @@ dimension: funnel_type {
   - `is_last_12_months`
   - `is_yoy_comparable`
 - Dynamic flagging enabled intuitive dashboard filtering without needing manual parameter controls
+- Created a custom LookML view to unify **historical and live spend data** across Amazon, Meta, and other platforms  
+  Archived spend data was collected in **Google Sheets**, imported via **Daasity** into Snowflake, and merged with active platform data.  
+  This enabled one **master spend dataset** to support full YoY analytics with no data gaps.
 
-### 📄 Custom Time Flag Snippet
+### 📄 Master Spend View Snippet
+
+To merge historical and current paid media data, I created a custom view that unified data from Amazon, Meta, and other platforms into a single spend dataset. This ensured executive dashboards could reflect accurate YoY performance, even when legacy data wasn't in our primary systems.
 
 ```lookml
- dimension: last_5_weeks_flag {
-    type: yesno
+view: vendor_performance_plus_historical {
+  derived_table: {
     sql:
-    CASE
-      WHEN ${calendar_week_of_year} BETWEEN (EXTRACT(WEEK FROM CURRENT_DATE) - 5) AND (EXTRACT(WEEK FROM CURRENT_DATE) - 1)
-      THEN TRUE
-      ELSE FALSE
-    END
-  ;;
+      SELECT * FROM DAASITY_DB.UMS.VENDOR_PERFORMANCE
+      UNION ALL
+      SELECT * FROM DAASITY_DB.GSHEETS.DS_AMAZON_HISTORICAL_FINAL
+      UNION ALL
+      SELECT * FROM DAASITY_DB.AMAZON_DSP_JAN01_2023_TO_DEC31_2024.GSHEETS
+      UNION ALL
+      SELECT * FROM DAASITY_DB.AMAZON_DSP_JAN01_2025_TO_CURRENT.GSHEETS
+      UNION ALL
+      SELECT * FROM DAASITY_DB.GOOGLEADS_HISTORICALDATA_JAN01_2023_TO_AUG31_2024.GSHEETS
+    ;;
   }
+
+  # Dimension for period (current vs comp)
+  dimension: period {
+    type: string
+    sql: ${calendar_v2.period} ;;
+  }
+
+  dimension: id {
+    type: string
+    sql: ${TABLE}.id ;;
+  }
+
+# other dimensions and measures
+  END ;;
+}
 ```
-### 📸 Screenshot: Executive Pulse Dashboard
+
+### 📸 Screenshot: Executive Pulse Dashboard 
+![Executive Pulse Dashboard](./executive%20pulse.jpg)
+
 
 }

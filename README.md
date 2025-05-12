@@ -34,6 +34,8 @@ This portfolio showcases my work developing scalable, end-to-end business intell
 ### 📸 Screenshot: Paid Media Performance Dashboard
 
 ![Paid Media Performance Dashboard](./dynamic_paid_media_dashboard.jpg)
+![Paid Media Performance Dashboard](./dynami_date_type_picker.jpg)
+
 
 ### 🧠 Campaign Funnel Classification: `funnel_type` Dimension
 
@@ -45,17 +47,34 @@ To power funnel-stage analysis across paid media campaigns, I created a robust c
 - Catch-all fallback using keywords (`Awareness`, `Conversion`, etc.)
 - All unmatched campaigns are labeled as `Unidentified` to preserve completeness
 
+### 🧠 Campaign Funnel Classification: `funnel_type` Dimension
+
+To power funnel-stage analysis across paid media campaigns, I created a robust custom dimension in LookML that classifies campaigns as **Upper**, **Mid**, or **Lower Funnel**.
+
+#### 🔧 How It Works:
+- Hardcoded list of legacy campaigns for guaranteed accuracy
+- Pattern-matching logic for newer campaigns with naming consistency
+- Catch-all fallback using keywords (`Awareness`, `Conversion`, etc.)
+- All unmatched campaigns are labeled as `Unidentified` to preserve completeness
+
+### 📄 Example LookML Snippet
+
 ```lookml
 dimension: funnel_type {
   type: string
+  label: "Funnel Type"
+  description: "Categorizes campaigns into funnel stages based on the campaign name"
   sql:
     CASE
       WHEN ${campaign_name} IN (...) THEN 'Upper'
+      WHEN ${campaign_name} IN (...) THEN 'Mid'
+      WHEN ${campaign_name} IN (...) THEN 'Lower'
+      WHEN ${campaign_name} LIKE 'TNT|Drip Drop|YouTube|Remarketing|%' THEN 'Mid'
+      WHEN ${campaign_name} LIKE '%Awareness%' OR ${campaign_name} LIKE '%_UF_%' THEN 'Upper'
       ...
       ELSE 'Unidentified'
     END ;;
 }
-
 
 ----
 
@@ -112,7 +131,6 @@ dimension: funnel_type {
     END ;;
 }
 
-----
 
 ## 🗓️ Intelligent Time Comparison Flags
 

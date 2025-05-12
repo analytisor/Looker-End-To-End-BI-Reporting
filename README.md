@@ -35,6 +35,28 @@ This portfolio showcases my work developing scalable, end-to-end business intell
 
 ![Paid Media Performance Dashboard](./dynamic_paid_media_dashboard.jpg)
 
+### 🧠 Campaign Funnel Classification: `funnel_type` Dimension
+
+To power funnel-stage analysis across paid media campaigns, I created a robust custom dimension in LookML that classifies campaigns as **Upper**, **Mid**, or **Lower Funnel**.
+
+#### 🔧 How It Works:
+- Hardcoded list of legacy campaigns for guaranteed accuracy
+- Pattern-matching logic for newer campaigns with naming consistency
+- Catch-all fallback using keywords (`Awareness`, `Conversion`, etc.)
+- All unmatched campaigns are labeled as `Unidentified` to preserve completeness
+
+```lookml
+dimension: funnel_type {
+  type: string
+  sql:
+    CASE
+      WHEN ${campaign_name} IN (...) THEN 'Upper'
+      ...
+      ELSE 'Unidentified'
+    END ;;
+}
+
+
 ----
 
 

@@ -1,4 +1,4 @@
-# looker-end-to-end-bi-reporting
+# Looker-End-To-End-Bi-Reporting
 
 This portfolio showcases my work developing scalable, end-to-end business intelligence solutions in Looker. These projects span multiple domains including marketing, sales, executive reporting, subscriptions, and customer retention analytics. The work highlights my skills in LookML modeling, dashboard design, and translating business requirements into actionable insights.
 
@@ -27,7 +27,7 @@ This portfolio showcases my work developing scalable, end-to-end business intell
 
 ### 🧩 Technical Highlights
 - Custom dimensions to classify campaigns by funnel stage (based on naming conventions or fallback hardcoded rules)
-- Scheduled dashboard delivery to stakeholders via email
+- Created custom dimensions for date selection type picker 
 
 ### 💥 Business Impact
 - Eliminated manual weekly reporting for the paid media manager
@@ -35,7 +35,11 @@ This portfolio showcases my work developing scalable, end-to-end business intell
 
 ### 📸 Screenshot: Paid Media Performance Dashboard
 
+The Paid Media Manager was given the ability to slice and dice the data using dynamic filters, including vendor-level filtering and other customizable dimensions.
 ![Paid Media Performance Dashboard](./dynamic_paid_media_dashboard.jpg)  
+
+Paid Media Managers were given the ability to toggle charts across different date ranges (e.g., quarterly, monthly, weekly) to extract the most relevant insights for their needs.
+
 ![Dynamic Date Type Picker](./dynami_date_type_picker.jpg)
 
 ### 🧠 Campaign Funnel Classification: `funnel_type` Dimension
